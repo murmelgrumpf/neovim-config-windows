@@ -1,4 +1,6 @@
-require("MurmelsConfigs")
-print("hello")
+require("MurmelsConfigs.remap")
+require("MurmelsConfigs.set")
 
-vim.env.TERM = "xterm-256color"
+
+vim.cmd [[source $VIMRUNTIME/mswin.vim]]
+vim.cmd [[behave mswin]]
