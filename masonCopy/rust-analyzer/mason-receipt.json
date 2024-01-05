@@ -1,0 +1,1 @@
+{"name":"rust-analyzer","metrics":{"start_time":1704125962916,"completion_time":1704125966892},"secondary_sources":[],"schema_version":"1.1","primary_source":{"type":"registry+v1","id":"pkg:github\/rust-lang\/rust-analyzer@2024-01-01"},"links":{"opt":{},"bin":{"rust-analyzer.cmd":"rust-analyzer.exe"},"share":{"mason-schemas\\lsp\\rust-analyzer.json":"mason-schemas\\lsp.json"}}}

@@ -1,0 +1,1 @@
+{"primary_source":{"id":"pkg:npm\/stylelint-lsp@2.0.0","type":"registry+v1"},"links":{"bin":{"stylelint-lsp.cmd":"node_modules\\.bin\\stylelint-lsp.cmd"},"share":{"mason-schemas\\lsp\\stylelint-lsp.json":"mason-schemas\\lsp.json"},"opt":{}},"secondary_sources":[],"name":"stylelint-lsp","schema_version":"1.1","metrics":{"completion_time":1704444304840,"start_time":1704444283520}}
