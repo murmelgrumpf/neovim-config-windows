@@ -28,13 +28,14 @@ return require('packer').startup(function(use)
 		use('mbbill/undotree')
 		use('tpope/vim-fugitive')
 
-
+        use {
+            "williamboman/mason.nvim"
+        }
 		use {
 			'VonHeikemen/lsp-zero.nvim',
 			branch = 'v3.x',
 			requires = {
 				--- Uncomment these if you want to manage the language servers from neovim
-				{'williamboman/mason.nvim'},
 				{'williamboman/mason-lspconfig.nvim'},
 
 				-- LSP Support
@@ -50,4 +51,15 @@ return require('packer').startup(function(use)
 				{'saadparwaiz1/cmp_luasnip'},
 			}
 		}		
+
+        use({
+            "nvimtools/none-ls.nvim",
+            config = function()
+                require("null-ls").setup()
+            end,
+            requires = { 
+                { "nvim-lua/plenary.nvim" },
+                { "jay-babu/mason-null-ls.nvim" },
+            },
+        })
 end)
