@@ -30,5 +30,3 @@ require ('mason-null-ls').setup({
         end,
     },
 })
-
-

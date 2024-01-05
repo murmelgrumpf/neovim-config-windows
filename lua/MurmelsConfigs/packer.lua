@@ -62,4 +62,5 @@ return require('packer').startup(function(use)
                 { "jay-babu/mason-null-ls.nvim" },
             },
         })
+
 end)
