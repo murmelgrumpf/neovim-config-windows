@@ -15,14 +15,29 @@ return require('packer').startup(function(use)
 
 		use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
+		--use({
+		--	'rose-pine/neovim', 
+		--	as = 'rose-pine', 
+		--	config = function()
+		--		vim.cmd('colorscheme rose-pine')
+		--	end
+		--})
+
 		use({
-			'rose-pine/neovim', 
-			as = 'rose-pine', 
+			'Mofiqul/dracula.nvim', 
+			as = 'dracula', 
 			config = function()
-				vim.cmd('colorscheme rose-pine')
+				vim.cmd('colorscheme dracula')
 			end
 		})
-
+--        use {
+--            'folke/tokyonight.nvim',
+--            as = 'tokyonight',
+--			config = function()
+--				vim.cmd('colorscheme tokyonight-moon')
+--			end
+--        }
+--
 
 		use('theprimeagen/harpoon')
 		use('mbbill/undotree')
@@ -63,4 +78,14 @@ return require('packer').startup(function(use)
             },
         })
 
+        use {
+            'rmagatti/auto-session',
+        }
+
+        use {
+            'nvim-lualine/lualine.nvim',
+            requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+        }
+
+        use ('f-person/git-blame.nvim')
 end)
