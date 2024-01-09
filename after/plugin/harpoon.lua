@@ -19,12 +19,6 @@ vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<C-y>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
 
---vim.keymap.set("n", "<leader>ple", function()
---    local r, c = unpack(vim.api.nvim_win_get_cursor(0))
---    vim.cmd("find ./public/translations/en.json")
---    vim.cmd(string.format("call cursor(%d, %d)", r, c+1))
---end)
-
 vim.api.nvim_create_autocmd({"BufEnter"},
 {
     pattern = {"*.ts", "*.hbs"},
@@ -54,5 +48,24 @@ vim.api.nvim_create_autocmd({"BufEnter"},
             list:append(list.config.create_list_item(list.config, genericPath:gsub("FILEEND", ".hbs"))) 
             harpoon:sync()
         end
+    end,
+})
+
+vim.api.nvim_create_autocmd({"BufEnter"},
+{
+    pattern = {"de.json", "en.json"},
+    callback = function()
+        path = normalize_path( 
+            vim.api.nvim_buf_get_name(
+                vim.api.nvim_get_current_buf()
+            ),
+            vim.loop.cwd()
+        )
+        list = harpoon:list()
+        list:clear()
+        genericPath = path:gsub("de.json", "FILEEND"):gsub("en.json", "FILEEND")
+        list:append(list.config.create_list_item(list.config, genericPath:gsub("FILEEND", "de.json"))) 
+        list:append(list.config.create_list_item(list.config, genericPath:gsub("FILEEND", "en.json"))) 
+        harpoon:sync()
     end,
 })
