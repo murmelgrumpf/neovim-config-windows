@@ -1,5 +1,4 @@
 # Todos
-* Spellchecker nvim default
-* Ember Template lint
-* Eslint maybe (help)
 
+- Spellchecker nvim default
+- Eslint maybe (help)

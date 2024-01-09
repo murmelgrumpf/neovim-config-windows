@@ -18,15 +18,20 @@ null_ls.setup({
     debounce = 50,
     debounce_text_changes = 50,
     update_in_insert = true,
+    root_dir = require("null-ls.utils").root_pattern(".git", "package.json"),
 })
 
 require ('mason-null-ls').setup({
-    ensure_installed = {'eslint_d'},
+    ensure_installed = {'eslint_d', 'prettierd'},
     handlers = {
         function() end, -- disables automatic setup of all null-ls sources
         eslint_d = function(source_name, methods)
             null_ls.register(formatting.eslint_d)
             null_ls.register(diagnostics.eslint_d.with({diagnostic_config = { underline = true, update_in_insert = true }}))
         end,
+        prettierd = function(source_name, methods)
+            null_ls.register(formatting.prettierd)
+        end,
+
     },
 })
