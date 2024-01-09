@@ -1,11 +1,58 @@
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
+local harpoon = require("harpoon")
+local Path = require("plenary.path")
 
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+local function normalize_path(buf_name, root)
+    return Path:new(buf_name):make_relative(root)
+end
 
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+-- REQUIRED
+config = harpoon:setup().config
+-- REQUIRED
 
+vim.keymap.set("n", "<leader>a", function() 
+    list = harpoon:list()
+    list:append(list.config.create_list_item(list.config, "after\\plugin\\telescope.lua")) 
+end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-y>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+
+--vim.keymap.set("n", "<leader>ple", function()
+--    local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+--    vim.cmd("find ./public/translations/en.json")
+--    vim.cmd(string.format("call cursor(%d, %d)", r, c+1))
+--end)
+
+vim.api.nvim_create_autocmd({"BufEnter"},
+{
+    pattern = {"*.ts", "*.hbs"},
+    callback = function()
+        path = normalize_path( 
+            vim.api.nvim_buf_get_name(
+                vim.api.nvim_get_current_buf()
+            ),
+            vim.loop.cwd()
+        )
+        if string.find(path, "\\templates\\") or string.find(path, "\\routes\\") or string.find(path, "\\controllers\\") then
+            list = harpoon:list()
+            list:clear()
+            genericPath = path:gsub("\\templates\\", "\\COOLTEMPPATHTHINGY\\"):gsub("%.hbs", "FILEEND")
+            genericPath = genericPath:gsub("\\routes\\", "\\COOLTEMPPATHTHINGY\\"):gsub("%.ts", "FILEEND")
+            genericPath = genericPath:gsub("\\controllers\\", "\\COOLTEMPPATHTHINGY\\")
+            list:append(list.config.create_list_item(list.config, genericPath:gsub("COOLTEMPPATHTHINGY", "controllers"):gsub("FILEEND", ".ts"))) 
+            list:append(list.config.create_list_item(list.config, genericPath:gsub("COOLTEMPPATHTHINGY", "templates"):gsub("FILEEND", ".hbs"))) 
+            list:append(list.config.create_list_item(list.config, genericPath:gsub("COOLTEMPPATHTHINGY", "routes"):gsub("FILEEND", ".ts"))) 
+            harpoon:sync()
+        end
+        if string.find(path, "\\components\\") then
+            list = harpoon:list()
+            list:clear()
+            genericPath = path:gsub("%.ts", "FILEEND"):gsub("%.hbs", "FILEEND")
+            list:append(list.config.create_list_item(list.config, genericPath:gsub("FILEEND", ".ts"))) 
+            list:append(list.config.create_list_item(list.config, genericPath:gsub("FILEEND", ".hbs"))) 
+            harpoon:sync()
+        end
+    end,
+})

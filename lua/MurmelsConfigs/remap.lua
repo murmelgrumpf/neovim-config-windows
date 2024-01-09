@@ -47,4 +47,13 @@ vim.keymap.set("n", "<leader>ple", function()
     vim.cmd(string.format("call cursor(%d, %d)", r, c+1))
 end)
 
+vim.api.nvim_create_autocmd({"BufReadPost"}, {
+    pattern = {"*"},
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"",false)
+        end
+    end
+})
+
 

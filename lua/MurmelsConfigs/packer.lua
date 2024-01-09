@@ -30,16 +30,14 @@ return require('packer').startup(function(use)
 				vim.cmd('colorscheme dracula')
 			end
 		})
---        use {
---            'folke/tokyonight.nvim',
---            as = 'tokyonight',
---			config = function()
---				vim.cmd('colorscheme tokyonight-moon')
---			end
---        }
---
 
-		use('theprimeagen/harpoon')
+        use "nvim-lua/plenary.nvim" -- don't forget to add this one if you don't have it yet!
+        use {
+            "ThePrimeagen/harpoon",
+            branch = "harpoon2",
+            requires = { {"nvim-lua/plenary.nvim"} }
+        }
+
 		use('mbbill/undotree')
 		use('tpope/vim-fugitive')
 
