@@ -35,7 +35,18 @@ require('lualine').setup {
         end
         return result
     end},
-    lualine_c = {'filename'},
+    lualine_c = {'filename', function()
+        path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+        if string.find(path, "\\templates\\") then
+            return "Template"
+        elseif string.find(path, "\\routes\\") then
+            return "Route" 
+        elseif string.find(path, "\\controllers\\") then
+            return "Controller"
+        elseif string.find(path, "\\components\\") then
+            return "Component"
+        end
+    end},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
