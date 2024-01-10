@@ -18,7 +18,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'stylelint_lsp', 'jdtls',  'tsserver', 'ember', 'gopls'},
+  ensure_installed = {'lua_ls', 'stylelint_lsp', 'jdtls',  'tsserver', 'ember', 'gopls'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -45,9 +45,16 @@ require('mason-lspconfig').setup({
                 require("mason-registry").get_package("jdtls"):get_install_path() .. "/lombok.jar"
                 ),
             },
-           root_dir = function() 
-               return vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mvnw'}, { upward = true })[1])
-           end, 
+            settings = {
+                java = {
+                    project = {
+                        sourcePaths = {"target/generated-sources/annotations"}
+                    }
+                }
+            },
+            root_dir = function() 
+                return vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mvnw'}, { upward = true })[1])
+            end, 
        })
    end,
    tsserver = function()

@@ -19,6 +19,12 @@ require("telescope").setup {
     pickers = {
         find_files = {
             path_display = filenameFirst,
+        },
+        live_grep = {
+            path_display = filenameFirst,
+        },
+        oldfiles = {
+            path_display = filenameFirst,
         }
     }
 }
@@ -39,6 +45,8 @@ require("auto-session").setup {
   auto_session_use_git_branch = false,
 
   auto_session_enable_last_session = false,
+  post_delete_cmds = {"LspRestart"},
+--, "!prettierd restart"
 
   session_lens = {
     buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session

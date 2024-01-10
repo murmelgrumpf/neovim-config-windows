@@ -9,10 +9,7 @@ end
 config = harpoon:setup().config
 -- REQUIRED
 
-vim.keymap.set("n", "<leader>a", function() 
-    list = harpoon:list()
-    list:append(list.config.create_list_item(list.config, "after\\plugin\\telescope.lua")) 
-end)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
 vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
