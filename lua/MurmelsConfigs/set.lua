@@ -6,6 +6,16 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.api.nvim_create_autocmd({ "BufCreate", "BufEnter", "SessionLoadPost" },
+    {
+        pattern = { "*.xml" },
+        callback = function()
+            print("hoh")
+            vim.cmd("setlocal expandtab!")
+        end
+    }
+)
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
@@ -26,4 +36,3 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
-
