@@ -44,10 +44,11 @@ require("auto-session").setup {
     auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     auto_session_use_git_branch = false,
 
-    auto_session_enable_last_session = false,
-    post_delete_cmds = { "LspRestart" },
-    --, "!prettierd restart"
+    auto_save_enabled = true,
 
+    auto_session_enable_last_session = false,
+    --, "!prettierd restart"
+    --auto_session_create_enabled = true,
     session_lens = {
         buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
         load_on_setup = true,
@@ -56,9 +57,9 @@ require("auto-session").setup {
     },
 }
 
-vim.keymap.set("n", "<C-s>", function()
-    --vim.cmd [[wa]]
-    require("auto-session.session-lens").search_session()
+vim.keymap.set("n", "<C-s>", function(...)
+    vim.cmd "wa"
+    require("auto-session.session-lens").search_session(...)
 end, {
     noremap = true,
 })

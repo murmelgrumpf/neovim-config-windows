@@ -1,6 +1,6 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
-	return
+    return
 end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -21,16 +21,19 @@ null_ls.setup({
     root_dir = require("null-ls.utils").root_pattern(".git", "package.json"),
 })
 
-require ('mason-null-ls').setup({
-    ensure_installed = {'eslint_d', 'prettierd'},
+require('mason-null-ls').setup({
+    ensure_installed = { 'eslint_d', 'prettierd' },
     handlers = {
         function() end, -- disables automatic setup of all null-ls sources
         eslint_d = function(source_name, methods)
             null_ls.register(formatting.eslint_d)
-            null_ls.register(diagnostics.eslint_d.with({diagnostic_config = { underline = true, update_in_insert = true }}))
+            null_ls.register(diagnostics.eslint_d.with({ diagnostic_config = { underline = true, update_in_insert = true } }))
         end,
         prettierd = function(source_name, methods)
-            --null_ls.register(formatting.prettierd)
+            null_ls.register(formatting.prettierd.with({
+                filetypes = { ".hbs" }
+
+            }))
         end,
 
     },
