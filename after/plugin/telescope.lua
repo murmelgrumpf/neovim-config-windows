@@ -34,32 +34,31 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
-	builtin.live_grep();
+    builtin.live_grep();
 end)
 
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 require("telescope").load_extension("session-lens")
 require("auto-session").setup {
-  log_level = vim.log.levels.ERROR,
-  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-  auto_session_use_git_branch = false,
+    log_level = vim.log.levels.ERROR,
+    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+    auto_session_use_git_branch = false,
 
-  auto_session_enable_last_session = false,
-  post_delete_cmds = {"LspRestart"},
---, "!prettierd restart"
+    auto_session_enable_last_session = false,
+    post_delete_cmds = { "LspRestart" },
+    --, "!prettierd restart"
 
-  session_lens = {
-    buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
-    load_on_setup = true,
-    theme_conf = { border = true },
-    previewer = false,
-  },
+    session_lens = {
+        buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
+        load_on_setup = true,
+        theme_conf = { border = true },
+        previewer = false,
+    },
 }
 
-vim.keymap.set("n", "<C-s>", function() 
-    vim.cmd [[wa]]
+vim.keymap.set("n", "<C-s>", function()
+    --vim.cmd [[wa]]
     require("auto-session.session-lens").search_session()
 end, {
-  noremap = true,
+    noremap = true,
 })
-

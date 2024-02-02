@@ -10,8 +10,8 @@ vim.api.nvim_create_autocmd({ "BufCreate", "BufEnter", "SessionLoadPost" },
     {
         pattern = { "*.xml" },
         callback = function()
-            print("hoh")
-            vim.cmd("setlocal expandtab!")
+            vim.cmd("setlocal expandtab noexpandtab")
+            vim.cmd("setlocal nofixendofline nofixendofline")
         end
     }
 )

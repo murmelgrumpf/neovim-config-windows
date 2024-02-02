@@ -13,6 +13,8 @@ return require('packer').startup(function(use)
 
 
 
+    use('ThePrimeagen/vim-be-good')
+
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
     --use({
@@ -31,7 +33,7 @@ return require('packer').startup(function(use)
         end
     })
 
-    use "nvim-lua/plenary.nvim"     -- don't forget to add this one if you don't have it yet!
+    use "nvim-lua/plenary.nvim" -- don't forget to add this one if you don't have it yet!
     use {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
