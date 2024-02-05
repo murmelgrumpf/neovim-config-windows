@@ -31,7 +31,7 @@ require('mason-null-ls').setup({
         end,
         prettierd = function(source_name, methods)
             null_ls.register(formatting.prettierd.with({
-                filetypes = { ".hbs" }
+                filetypes = { "handlebars" }
 
             }))
         end,
