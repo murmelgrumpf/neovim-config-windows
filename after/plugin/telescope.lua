@@ -45,6 +45,7 @@ require("auto-session").setup {
     auto_session_use_git_branch = false,
 
     auto_save_enabled = true,
+    auto_session_enabled = true,
 
     auto_session_enable_last_session = false,
     --, "!prettierd restart"
